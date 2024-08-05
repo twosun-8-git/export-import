@@ -1,0 +1,2 @@
+# export-import
+exportとimport方法の違いや利点を検証するためのサンプルリポジトリ

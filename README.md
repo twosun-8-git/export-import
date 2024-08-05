@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+# named export と default export の違いについて
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### export
 
-## Available Scripts
+```js
+/** named export */
+export function Hoge() {}
 
-In the project directory, you can run:
+/** default expor */
+export default function Hoge() {}
+```
 
-### `npm start`
+### import
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+上記の export された **Hoge** コンポーネントを import する時
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```js
+/** named export */
+import { Hoge } from "./Hoge";
 
-### `npm test`
+/** default expor */
+import Hoge from "./Hoge";
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+// または
+import HogeDef from "./Hoge"; // 名前を変更できる;
+```
 
-### `npm run build`
+**default export**されていると import 先でコンポーネント名が変更できてしまうのは混乱を招きやすい。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+下記のように**複数のコンポーネントをまとめて index.tsx で import & export を行う**場合を考えると**named export**を使用している方が安心だと思われる。
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+components
+  ├ Fuga.tsx
+  ├ Hoge.tsx
+  ├ index.tsx // Hoge, Fuga, Piyoをまとめてexportする
+  └ Piyo.tsx
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+上記をサンプルとして"named export"と"default export"を使用した場合を比較してます。
 
-### `npm run eject`
+### named export の場合
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```js
+/**　index.tsx　*/
+export { Fuga } from "./Fuga";
+export { Hoge } from "./Hoge";
+export { Piyo } from "./Piyo";
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### default export の場合
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`as` を使用してデフォルトエクスポートに別名をつけています。
+別名なので命名も自由にできます。
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+/**　index.tsx　*/
+export { default as Fuga } from "./Fuga";
+export { default as Hoge } from "./Hoge";
+export { default as Piyo } from "./Piyo";
+```

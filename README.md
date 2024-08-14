@@ -1,10 +1,7 @@
+このリポジトリは Zenn の記事 **[📄 export は名前付きエクスポートでやりましょう](https://zenn.dev/cocomina/articles/recommended-export)
+** と連動したリポジトリです。
+
 # named export と default export の違いについて
-
-このリポジトリは Zenn の記事 **「export は名前付きエクスポートでやりましょう」** と連動したリポジトリです。
-
-## 📄 記事へのリンクはこちら
-
-[export は名前付きエクスポートでやりましょう](https://zenn.dev/cocomina/articles/recommended-export)
 
 ### export
 
